@@ -1,7 +1,6 @@
 import model from "./model.js";
 
 export const findAllModules = async () => {
-  console.log("here");
   return await model.find();
 };
 
