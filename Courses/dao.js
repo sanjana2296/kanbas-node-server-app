@@ -46,6 +46,7 @@ export const updateCourse = async (id, course) => {
 export const deleteCourse = async (id) => {
   try {
     await model.deleteOne({ cid: id });
+    console.log("Deleted");
   } catch (error) {
     console.error("Error finding courses:", error);
     throw error;
