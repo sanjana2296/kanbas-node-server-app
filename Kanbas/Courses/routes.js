@@ -25,5 +25,5 @@ export default function CourseRoutes(app) {
     res.sendStatus(204);
   });
 
-
+  
 }
