@@ -15,6 +15,9 @@ import AssingmentsRoutes from "./Assignments/routes.js";
 import UserRoutes from "./Users/routes.js";
 import cors from 'cors';
 import session from "express-session";
+import QuestionsRoutes from "./questions/routes.js";
+import QuizRoutes from "./quizzes/routes.js";
+
 const app = express();
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
 mongoose.connect(CONNECTION_STRING,{ 
@@ -55,6 +58,8 @@ WorkingWithObjects(app);
 WorkingWithModules(app);
 WorkingWithArrays(app);
 AssingmentsRoutes(app);
+QuizRoutes(app);
+QuestionsRoutes(app);
 UserRoutes(app)
 app.listen(process.env.PORT || 4000, () => {
   console.log("Server is listening on port 4000");
