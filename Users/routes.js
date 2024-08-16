@@ -2,6 +2,15 @@ import * as dao from "./dao.js";
 let currentUser = null;
 let currentU = null;
 export default function UserRoutes(app) {
+  const addCourse = async (req, res) => {
+    const user = await dao.enrollUserInCourse(req.params.userId, req.params.cid);
+    res.json(user);
+  };
+
+  const removeCourse = async (req, res) => {
+    const user = await dao.unEnrollUserInCourse(req.params.userId, req.params.cid);
+    res.json(user);
+  };
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
     res.json(user);
@@ -78,8 +87,7 @@ export default function UserRoutes(app) {
   }
 
   const profile = async (req, res) => {
-    // const currentUser = req.session["currentUser"];
-    const currentUser = currentU;
+    const currentUser = await dao.findUserByUsername(currentU?.username);
     if (!currentUser) {
       res.sendStatus(401);
       return;
@@ -97,4 +105,6 @@ export default function UserRoutes(app) {
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
   app.post("/api/users/profile", profile);
+  app.post("/api/users/:userId/addCourse/:cid", addCourse);
+  app.post("/api/users/:userId/removeCourse/:cid", removeCourse);
 }
