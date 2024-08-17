@@ -35,7 +35,7 @@ export const createCourse = async (course) => {
 
 export const updateCourse = async (id, course) => {
   try{
-    await model.updateOne({ cid: id }, { $set: course });
+    await model.updateOne({ number: id }, { $set: course });
   }catch(error) {
     console.error("Error finding courses:", error);
     throw error;
