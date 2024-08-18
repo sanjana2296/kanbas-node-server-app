@@ -12,6 +12,7 @@ const quizSchema = new mongoose.Schema(
     timeLimit: String,
     isMultipleAttempts: { type: String },
     isShowCorrectAnswers: { type: String, required: true },
+    noOfAttempts: {type: String},
     accessCode: String,
     oneQuestionAtATime: String,
     isWebCamRequired: String,
