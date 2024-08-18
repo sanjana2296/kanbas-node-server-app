@@ -11,6 +11,17 @@ export default function UserRoutes(app) {
     const user = await dao.unEnrollUserInCourse(req.params.userId, req.params.cid);
     res.json(user);
   };
+
+  const submitQuiz = async (req, res) => {
+    const user = await dao.submitQuizForUser(req.params.userId, req.body);
+    res.json(user);
+  };
+
+  const fetchQuizById = async (req, res) => {
+    const user = await dao.fetchQuizById(req.params.userId, req.params.qid);
+    res.json(user);
+  };
+
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
     res.json(user);
@@ -108,4 +119,6 @@ export default function UserRoutes(app) {
   app.post("/api/users/profile", profile);
   app.post("/api/users/:userId/addCourse/:cid", addCourse);
   app.post("/api/users/:userId/removeCourse/:cid", removeCourse);
+  app.post("/api/users/:userId/submitQuiz", submitQuiz);
+  app.get("/api/users/:userId/fetchQuiz/:qid", fetchQuizById);
 }

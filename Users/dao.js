@@ -54,6 +54,48 @@ export const unEnrollUserInCourse = async (userId, cid) => {
 
 export const findUserById = (userId) => model.findOne({ loginId: userId });
 
+export const submitQuizForUser = async (userId, quiz) => {
+  try {
+    const user = await findUserById(userId);
+    
+    if (user) {
+      const updatedQuiz = await model.findOneAndUpdate(
+        { loginId: userId },
+        { $push: { quizes: quiz } }, 
+        { new: true, useFindAndModify: false } 
+      );
+      console.log("Submitted quiz successfully for user:", updatedQuiz);
+      return updatedQuiz;
+    } else {
+      console.log("User not found");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error submitting quiz:", error);
+    throw error;
+  }
+};
+
+export const fetchQuizById = async (userId, qid) => {
+  try {
+    const user1 = await findUserById(userId);
+    const user = await model.findOne(
+      { loginId: userId, quizes: { $elemMatch: { id: qid } } },
+      { "quizes.$": 1 } 
+    ).exec();
+
+    if (user && user.quizes.length > 0) {
+      const quizDetail = user.quizes[0];
+      return quizDetail;
+    } else {
+      return null; 
+    }
+  } catch (error) {
+    console.error("Error fetching quiz detail:", error);
+    throw error;
+  }
+};
+
 export const findUserByUsername = (username) =>
   model.findOne({ username: username });
 
