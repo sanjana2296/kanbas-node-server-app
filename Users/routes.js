@@ -110,6 +110,14 @@ export default function UserRoutes(app) {
     res.json(currentUser);
   };
 
+  const updateProfile = async (req, res) => {
+    const { userId } = req.params;
+    console.log(userId);
+    const status = await dao.updateUser(userId, req.body);
+    console.log(status);
+    res.json(status);
+  };
+
   app.post("/api/users", createUser);
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
@@ -119,6 +127,7 @@ export default function UserRoutes(app) {
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
   app.post("/api/users/profile", profile);
+  app.post("/api/users/updateProfile/:userId", updateProfile);
   app.post("/api/users/:userId/addCourse/:cid", addCourse);
   app.post("/api/users/:userId/removeCourse/:cid", removeCourse);
   app.post("/api/users/:userId/submitQuiz", submitQuiz);
