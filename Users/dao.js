@@ -57,6 +57,7 @@ export const findUserById = (userId) => model.findOne({ loginId: userId });
 export const submitQuizForUser = async (userId, quiz) => {
   try {
     const user = await findUserById(userId);
+    console.log("quiz::",quiz);
     
     if (user) {
       const updatedQuiz = await model.findOneAndUpdate(

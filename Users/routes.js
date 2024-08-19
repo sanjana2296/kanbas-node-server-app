@@ -13,6 +13,7 @@ export default function UserRoutes(app) {
   };
 
   const submitQuiz = async (req, res) => {
+    console.log("body::",req.body);
     const user = await dao.submitQuizForUser(req.params.userId, req.body);
     res.json(user);
   };
