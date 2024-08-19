@@ -51,6 +51,7 @@ export default function UserRoutes(app) {
     const user = await dao.findUserById(req.params.userId);
     res.json(user);
   };
+
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     console.log(userId);
@@ -61,7 +62,7 @@ export default function UserRoutes(app) {
   const signup = async (req, res) => {
     const user = await dao.findUserByUsername(req.body.username);
     const loginId = generateLoginId();
-    const role = "STUDENT"
+    const role = req.body.role;
     if (user) {
       res.status(400).json({ message: "Username already taken" });
       return;
