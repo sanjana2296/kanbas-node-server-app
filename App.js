@@ -46,6 +46,13 @@ app.use(session(sessionOptions));
 //   origin: process.env.NETLIFY_URL || "http://localhost:3000",
 // }
 // ));
+
+
+app.use(cors({
+  credentials: true,
+  origin: process.env.NETLIFY_URL || "https://cheerful-khapse-8d274b.netlify.app",
+}
+));
 app.use(cors())
 app.use(express.json());
 CourseRoutes(app);
